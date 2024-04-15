@@ -26,7 +26,7 @@ def index():
     conn.close()
     return render_template('index.html', tasks=tasks)
 
-@app.route('/create_task', methods=['POST'])
+@app.route('/create_task', methods=['GET', 'POST'])
 def create_task():
     if request.method == 'POST':
         name = request.form['name']
@@ -39,6 +39,8 @@ def create_task():
         conn.commit()
         conn.close()
         return redirect(url_for('index'))
+    return ''
+
 
 @app.route('/edit_task/<int:id>', methods=['GET', 'POST'])
 def edit_task(id):
@@ -58,6 +60,8 @@ def edit_task(id):
         task = c.fetchone()
         conn.close()
         return render_template('edit_task.html', task=task)
+
+
 
 @app.route('/delete_task/<int:id>')
 def delete_task(id):
