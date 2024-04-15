@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form {
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        select {
+            height: 40px;
+        }
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Task</h1>
+    <form action="/edit_task/{{ task[0] }}" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" value="{{ task[1] }}"><br>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description">{{ task[2] }}</textarea><br>
+        <label for="status">Status:</label><br>
+        <select id="status" name="status">
+            <option value="Atlikta" {% if task[3] == 'Atlikta' %} selected {% endif %}>Atlikta</option>
+            <option value="Neatlikta" {% if task[3] == 'Neatlikta' %} selected {% endif %}>Neatlikta</option>
+            <option value="Nukelta" {% if task[3] == 'Nukelta' %} selected {% endif %}>Nukelta</option>
+        </select><br>
+        <label for="user">User:</label><br>
+        <input type="text" id="user" name="user" value="{{ task[4] }}"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
